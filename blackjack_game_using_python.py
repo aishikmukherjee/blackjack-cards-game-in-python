@@ -9,13 +9,21 @@ game = { 'player' : [],  # Player's cards
          'dealer' : []   # Dealer's cards
 }
 
+# Deals with ace value
+def adjust_ace(hand):
+    """Adjusts the value of Ace (11) to 1 if the score exceeds 21."""
+    while sum(hand) > 21 and 11 in hand:
+        hand[hand.index(11)] = 1  # Change the first occurrence of 11 to 1
+
 def pick_cards_for_dealer():
     """Picks one card at a time for the dealer and appends it to dealer's hand"""
     game['dealer'].append(random.choice(cards))
+    adjust_ace(game['dealer']) # Adjust Ace value if needed
 
 def pick_cards_for_player():
     """Picks one card at a time for the player and appends it to player's hand"""
     game['player'].append(random.choice(cards))
+    adjust_ace(game['player']) # Adjust Ace value if needed
 
 def loose_by_picking_exceeding_cards(score_of_player):
     """Checks if the player's score has exceeded 21 (bust)"""
