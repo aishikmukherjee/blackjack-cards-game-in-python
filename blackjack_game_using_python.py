@@ -1,8 +1,30 @@
 import blackjack_game_using_python_art  # Import 'art' module to display the game's logo
 import random  # Import 'random' module to pick cards randomly
 
-# List of cards with values; 11 represents Ace, 10 represents face cards
-cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+# List of cards with values
+cards = [
+    2, 3, 4, 5, 6, 7, 8, 9, 10,
+    10,  # Jack
+    10,  # Queen
+    10,  # King
+    11,  # Ace (can also be 1 depending on context)
+    2, 3, 4, 5, 6, 7, 8, 9, 10,
+    10,  # Jack
+    10,  # Queen
+    10,  # King
+    11,  # Ace (can also be 1 depending on context)
+    2, 3, 4, 5, 6, 7, 8, 9, 10,
+    10,  # Jack
+    10,  # Queen
+    10,  # King
+    11,  # Ace (can also be 1 depending on context)
+    2, 3, 4, 5, 6, 7, 8, 9, 10,
+    10,  # Jack
+    10,  # Queen
+    10,  # King
+    11   # Ace (can also be 1 depending on context)
+]
+
 
 # Dictionary to store the cards for the player and the dealer
 game = { 'player' : [],  # Player's cards
@@ -17,12 +39,18 @@ def adjust_ace(hand):
 
 def pick_cards_for_dealer():
     """Picks one card at a time for the dealer and appends it to dealer's hand"""
-    game['dealer'].append(random.choice(cards))
+    random.shuffle(cards)
+    picked_card = random.choice(cards)
+    game['dealer'].append(picked_card)
+    cards.remove(picked_card)
     adjust_ace(game['dealer']) # Adjust Ace value if needed
 
 def pick_cards_for_player():
     """Picks one card at a time for the player and appends it to player's hand"""
-    game['player'].append(random.choice(cards))
+    random.shuffle(cards)
+    picked_card = random.choice(cards)
+    game['player'].append(picked_card)
+    cards.remove(picked_card)
     adjust_ace(game['player']) # Adjust Ace value if needed
 
 def loose_by_picking_exceeding_cards(score_of_player):
